@@ -1,5 +1,5 @@
-# Flask加amis学校管理系统
-
+#  源自Flask加amis学校管理系统（https://gitee.com/o-_-_-o/school_management_system?_from=gitee_search）对其进行完善
+##  如下为开源软件所作的工作
 #### 介绍
 用flask 和百度的前端框架amis做的学校管理系统
 
@@ -7,7 +7,6 @@
 
 1.  python web框架Flask
 2.  百度出品的前端框架 [asim](https://baidu.gitee.io/amis/docs/index)
-
 
 #### 实现功能
 
@@ -22,14 +21,3 @@
 1.  mysql数据文件 jingshijiaoyu.sql
 2.  进入jsjy目录执行 python3.exe .\manager.py
 3.  后台默认账号是admin 123456
-
-#### 部分截图
-
-1.  登录
-<center><img src="./readme_img/login.png" /></center>
-2.  教师管理
-<center><img src="./readme_img/users.png" /></center>
-3.  学生管理
-<center><img src="./readme_img/stu.png" /></center>
-4.  分数管理
-<center><img src="./readme_img/score.png" /></center>
