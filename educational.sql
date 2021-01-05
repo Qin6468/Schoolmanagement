@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 04/01/2021 20:03:47
+ Date: 05/01/2021 14:41:08
 */
 
 SET NAMES utf8mb4;
@@ -56,13 +56,21 @@ DROP TABLE IF EXISTS `cc`;
 CREATE TABLE `cc`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `cid` int(0) NOT NULL COMMENT '课程id',
-  `c_id` int(0) NOT NULL COMMENT '班级id',
+  `class_id` int(0) NOT NULL COMMENT '班级id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cc
 -- ----------------------------
+INSERT INTO `cc` VALUES (1, 1, 2);
+INSERT INTO `cc` VALUES (2, 1, 4);
+INSERT INTO `cc` VALUES (3, 2, 2);
+INSERT INTO `cc` VALUES (4, 2, 4);
+INSERT INTO `cc` VALUES (5, 3, 2);
+INSERT INTO `cc` VALUES (6, 3, 4);
+INSERT INTO `cc` VALUES (7, 4, 2);
+INSERT INTO `cc` VALUES (8, 5, 4);
 
 -- ----------------------------
 -- Table structure for class
@@ -81,7 +89,7 @@ CREATE TABLE `class`  (
 -- Records of class
 -- ----------------------------
 INSERT INTO `class` VALUES (2, '二班', 23, 1600760130, 2);
-INSERT INTO `class` VALUES (4, '三班', 15, 1607061051, 4);
+INSERT INTO `class` VALUES (4, '三班', 17, 1607061051, 4);
 
 -- ----------------------------
 -- Table structure for course
@@ -95,7 +103,7 @@ CREATE TABLE `course`  (
   `credit` int(0) NOT NULL COMMENT '学分',
   `semester_hour` int(0) NOT NULL COMMENT '学时',
   `number` int(0) NOT NULL COMMENT '人数',
-  `time` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课时间',
+  `time` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课时间',
   `local` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课地点',
   `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
   PRIMARY KEY (`id`) USING BTREE
@@ -125,6 +133,15 @@ CREATE TABLE `sc`  (
 -- ----------------------------
 -- Records of sc
 -- ----------------------------
+INSERT INTO `sc` VALUES (1, 1, 1, 1);
+INSERT INTO `sc` VALUES (2, 1, 3, 5);
+INSERT INTO `sc` VALUES (3, 2, 1, 2);
+INSERT INTO `sc` VALUES (4, 3, 1, 3);
+INSERT INTO `sc` VALUES (5, 7, 1, 4);
+INSERT INTO `sc` VALUES (6, 2, 3, 6);
+INSERT INTO `sc` VALUES (7, 3, 3, 7);
+INSERT INTO `sc` VALUES (8, 5, 2, 9);
+INSERT INTO `sc` VALUES (9, 6, 2, 10);
 
 -- ----------------------------
 -- Table structure for score
@@ -197,6 +214,11 @@ CREATE TABLE `tc`  (
 -- ----------------------------
 -- Records of tc
 -- ----------------------------
+INSERT INTO `tc` VALUES (1, 35, 4);
+INSERT INTO `tc` VALUES (2, 34, 5);
+INSERT INTO `tc` VALUES (3, 31, 3);
+INSERT INTO `tc` VALUES (4, 32, 2);
+INSERT INTO `tc` VALUES (5, 36, 1);
 
 -- ----------------------------
 -- Table structure for teacher
@@ -217,11 +239,11 @@ CREATE TABLE `teacher`  (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES (16, 35, '大哥', '513723199112024634', 1609344000, 1607011200, 1606924800, '<p>啦啦啦</p>');
-INSERT INTO `teacher` VALUES (15, 34, '大老师', '513723199112024633', 1606838400, 1608825600, 1609344000, '<p>萨达</p>');
-INSERT INTO `teacher` VALUES (12, 31, '最小22', '513723199112024631', 0, 0, 0, '');
-INSERT INTO `teacher` VALUES (13, 32, '一二三', '513723199112024632', 0, 1608739200, 1608912000, '');
-INSERT INTO `teacher` VALUES (17, 36, '大哥223', '513723199112024635', 1606924800, 1607011200, 1606924800, '<p>啦啦啦2</p>');
+INSERT INTO `teacher` VALUES (16, 35, 'c语言老师', '513723199112024634', 1609344000, 1607011200, 1606924800, '<p>啦啦啦</p>');
+INSERT INTO `teacher` VALUES (15, 34, '历史老师', '513723199112024633', 1606838400, 1608825600, 1609344000, '<p>萨达</p>');
+INSERT INTO `teacher` VALUES (12, 31, '数学老师', '513723199112024631', 0, 0, 0, '');
+INSERT INTO `teacher` VALUES (13, 32, '英语老师', '513723199112024632', 0, 1608739200, 1608912000, '');
+INSERT INTO `teacher` VALUES (17, 36, '语文老师', '513723199112024635', 1606924800, 1607011200, 1606924800, '<p>啦啦啦2</p>');
 INSERT INTO `teacher` VALUES (18, 37, 'NV', '513723199112024635', 0, 0, 0, '');
 INSERT INTO `teacher` VALUES (19, 38, 'z5', '513723199112024635', 0, 0, 0, '');
 INSERT INTO `teacher` VALUES (20, 39, 'gN', '513723199112024635', 0, 0, 0, '');
