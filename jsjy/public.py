@@ -2,6 +2,7 @@ import json
 import  decimal
 class DecimalEncoder(json.JSONEncoder):
 	def default(self, o):
+		#如果是整数类型
 		if isinstance(o, decimal.Decimal):
 			return float(o)
 		super(DecimalEncoder, self).default(o)
@@ -21,5 +22,6 @@ def r(data,status=0,msg='',errors={}):
 		t['status']=422
 		t['msg']='验证错误'
 		pass
+	#将python对象编码成Json字符串
 	return json.dumps(t,ensure_ascii=False,cls=DecimalEncoder)
 

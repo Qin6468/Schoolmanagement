@@ -5,6 +5,7 @@ from .view.users import users#教师相关
 from .view.myclass import myclass#班级
 from .view.student import student#学生
 from .view.score import score#分数
+from .view.course import course#课程
 def create_app():
 	app=Flask(__name__)
 	app.config.from_object('config.Dev')
@@ -14,6 +15,7 @@ def create_app():
 	app.register_blueprint(myclass)
 	app.register_blueprint(student)
 	app.register_blueprint(score)
+	app.register_blueprint(course)#课程模块
 	@app.before_request
 	def check_need_login():#判断登录
 		# print(request.endpoint)
