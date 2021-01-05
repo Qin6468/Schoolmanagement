@@ -89,6 +89,7 @@ def get_student():
 	# rt['hasNext']=1
 	return r(rt)
 	pass
+'''
 #删除
 @student.route('/studentlist/<int:cid>',methods=['DELETE'])
 def delete_user(cid):
@@ -130,6 +131,7 @@ def edit_user(cid):
 		if old_class_id >0:
 			set_class_count(old_class_id);
 	return r({},0,'修改成功')
+'''
 def set_class_count(class_id):
 	if class_id>0:
 		count=db.session.query(Student).filter_by(class_id=class_id).count()

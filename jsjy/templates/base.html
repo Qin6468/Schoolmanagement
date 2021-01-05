@@ -115,7 +115,7 @@
               <i class="a-AsideNav-itemIcon glyphicon glyphicon-home"></i>
               <span class="a-AsideNav-itemLabel">首页</span>
             </a> 
-          <li class="a-AsideNav-item {% if '/account' in request.path %}is-open{% endif %}">
+          <li class="a-AsideNav-item {% if '/account' in request.path %}is-open is-active {% endif %}">
             <a>
               <span class="a-AsideNav-itemArrow"></span>
               <i class="a-AsideNav-itemIcon glyphicon glyphicon-user"></i>
@@ -156,6 +156,15 @@
               学生信息
              </div>
           </li>
+          <li class="a-AsideNav-item {% if request.path == '/course' %}is-open is-active{% endif %}">
+            <a href="/course">
+              <i class="a-AsideNav-itemIcon fa fa-book"></i>
+              <span class="a-AsideNav-itemLabel">课程信息</span>
+            </a> 
+           <div class="a-AsideNav-tooltip">
+            课程信息
+           </div>
+        </li>
           <li class="a-AsideNav-item {% if request.path == '/score' %}is-open is-active{% endif %}">
               <a href="/score">
                 <i class="a-AsideNav-itemIcon fa fa-hashtag"></i>

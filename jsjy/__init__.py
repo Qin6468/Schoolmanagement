@@ -1,4 +1,5 @@
 from flask import Flask,session,request,redirect,url_for
+from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 from .view.account import account#账号相关
 from .view.users import users#教师相关
@@ -9,6 +10,7 @@ from .view.course import course#课程
 def create_app():
 	app=Flask(__name__)
 	app.config.from_object('config.Dev')
+	app.config['SEND_FILE_MAX_AGE_DEFAULT']=timedelta(seconds=1)
 	db = SQLAlchemy(app)
 	app.register_blueprint(account)
 	app.register_blueprint(users)
@@ -20,5 +22,5 @@ def create_app():
 	def check_need_login():#判断登录
 		# print(request.endpoint)
 		if 'logged_in' not in session and request.endpoint not in ('account.login','static'):
-			return redirect('/login')
+			return redirect('/login')#重定向到注册模块
 	return app
