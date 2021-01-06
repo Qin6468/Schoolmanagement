@@ -2,6 +2,7 @@ from flask import Blueprint,render_template,Flask,request,redirect,session,json,
 import hashlib,time
 from jsjy.models import db, Course,Class
 from jsjy.public import r
+from sqlalchemy import distinct
 
 course=Blueprint('course',__name__)
 
@@ -73,21 +74,27 @@ def add_course():
 	if user is not None:
 		return r({},0,'',{'c_id':'课程已经存在'})
 
-	j_data.setdefault('l2_name','')
-	j_data.setdefault('l2_phone','')
-	j_data.setdefault('add','')
-	j_data.setdefault('code','')
 	j_data.setdefault('info','')
-	cl = course(j_data['class_id'],j_data['name'],j_data['code'],j_data['cid'],j_data['in_time'],0,j_data['info'],j_data['l_name'],j_data['l_phone'],j_data['l2_name'],j_data['l2_phone'],j_data['add'])
+	cl = Course(j_data['c_id'],j_data['name'],j_data['credit'],j_data['college'],j_data['semester_hour'],j_data['number'],j_data['time'],j_data['info'],j_data['local'])
 	db.session.add(cl)
 	db.session.commit()
-	set_class_count(j_data['class_id']);
+	set_course_count(j_data['c_id'])
 	return r({},0,'添加成功')
 
-def set_class_count(class_id):
-	if class_id>0:
-		count=db.session.query(course).filter_by(c_id=c_id).count()
-		tc = db.session.query(Class).filter_by(id=c_id).first()
-		tc.user_count=count
+def set_course_count(c_id):
+	if c_id>0:
+		count=db.session.query(Course).filter_by(c_id=c_id).count()
+		# tc = db.session.query(Class).filter_by(id=c_id).first()
+		# 课程数
+		tc.course_count=count
 		db.session.commit()
 	return True
+
+@course.route('/courselist/minlist',methods=['GET'])
+def get_minlist():
+	# data =db.session.query(distinct(Course.college)).all()
+	data=db.session.query(Course.c_id,Course.college).order_by(Course.college.desc()).all()
+	re=[]
+	for x in data:
+		re.append({'label':x[1],'value':x[0]})
+	return r({'courseopt':re})

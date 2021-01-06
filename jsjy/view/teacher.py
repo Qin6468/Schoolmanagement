@@ -152,7 +152,7 @@ def edit_user(uid):
 @teachers.route('/userdata/minlist',methods=['GET'])
 def get_minlist():
 	data=db.session.query(Teacher.id,Teacher.name).order_by(Teacher.id.desc()).all()
-	re=[];
+	re=[]
 	for x in data:
 		re.append({'label':x[1],'value':x[0]})
 	return r({'options':re})

@@ -91,7 +91,7 @@ def edit_class(cid):
 @myclass.route('/classlist/minlist',methods=['GET'])
 def get_minlist():
 	data=db.session.query(Class.id,Class.name).order_by(Class.id.desc()).all()
-	re=[];
+	re=[]
 	for x in data:
 		re.append({'label':x[1],'value':x[0]})
 	return r({'options':re})

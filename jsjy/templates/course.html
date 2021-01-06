@@ -33,7 +33,7 @@
       	                // 'name':randomPassword(2),
       	                'cid':'513723199112023637',
   	              },
-      	          "api": "post:/student",
+      	          "api": "post:/course",
       	          "reload": "window",
       	          "controls": [
       	            {
@@ -50,7 +50,7 @@
                       "name": "college",
                       "value":"",
                       "label": "学院",
-                      "source": "${options}",
+                      "source": "${courseopt}",
                       searchable:true,
                       required:1,
                     },
@@ -58,7 +58,7 @@
                       "type": "text",
                       "name": "credit",
                       "label": "学分",
-                      
+                      required:1,
                       validations:{
                         maxLength:20,
                       },
@@ -154,7 +154,7 @@
         amis.embed("#main", {
           type: "page",
           title: "课程列表",
-          //initApi: "/courselist/minlist",
+          initApi: "/courselist/minlist",
           // subTitle: "展示一些常规的表单，包括验证、提示等等",
           body: [
           	{
@@ -206,7 +206,7 @@
                         "mode":"inline",
                           "type": "text",
                           searchable:true,
-                          "source": "${options}",
+                          "source": "${courseopt}",
                       },
                   },
                   {
