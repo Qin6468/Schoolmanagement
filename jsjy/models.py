@@ -124,31 +124,6 @@ class Course(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     c_id = db.Column(db.Integer)
-<<<<<<< HEAD
-    name = db.Column(db.String(60), nullable=False)
-    college = db.Column(db.String(20), nullable=False)
-    credit = db.Column(db.Integer)
-    semester_hour = db.Column(db.Integer)
-    number=db.Column(db.Integer)
-    time = db.Column(db.String(60), nullable=False)
-    local=db.Column(db.String(60), nullable=False)
-    info = db.Column(db.Text, nullable=False)
-    
-
-    def __init__(self,c_id,name,college,credit,semester_hour,number,time,local,info):
-    	self.c_id=c_id
-    	self.name=name
-    	self.college=college
-    	self.credit=credit
-    	self.semester_hour=semester_hour
-    	self.number=number
-    	self.time=time
-    	self.local=local
-    	self.info=info
-
-    def __repr__(self):
-        return '<Course id %r>' % self.id
-=======
     name = db.Column(db.String(20), nullable=False)
     college = db.Column(db.String(18), nullable=False)
     credit = db.Column(db.Integer)
@@ -218,4 +193,41 @@ class tc(db.Model):
     
     def __repr__(self):
         return '<Teacher id %r>' % self.id
->>>>>>> 964c5771bd068058605ca06a9c486ecf3e4f7838
+
+class evaluation(db.Model):
+    """
+    评价
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, primary_key=True)
+    tid = db.Column(db.Integer, primary_key=True)
+    cid = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer)
+
+    def __init__(self, uid, tid, cid, score):
+        self.uid = uid
+        self.tid = tid
+        self.cid = cid
+        self.score = score
+
+    def __repr__(self):
+        return '<Student id %r>' % self.id
+
+class paperselection(db.Model):
+    """
+    选题
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, primary_key=True)
+    tid = db.Column(db.Integer, primary_key=True)
+    topic = db.Column(db.String(20), nullable=False)
+    info = db.Column(db.Text, nullable=False)
+
+    def __init__(self, uid, tid, topic, info):
+        self.uid = uid
+        self.tid = tid
+        self.topic = topic
+        self.info = info
+    
+    def __repr__(self):
+        return '<Student id %r>' % self.id
