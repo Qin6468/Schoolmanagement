@@ -17,13 +17,13 @@
     }
  		// 添加按钮
  		addjson={
-      	      "label": "新增学生",
+      	      "label": "新增课程",
       	      "type": "button",
       	      "actionType": "dialog",
       	      "level": "success",
       	      // "className": "m-b-sm",
       	      "dialog": {
-      	        "title": "新增学生",
+      	        "title": "新增课程",
       	        "size":'md',
       	        "body": {
       	          "type": "form",
@@ -39,7 +39,7 @@
       	            {
                       "type": "text",
                       "name": "name",
-                      "label": "姓名",
+                      "label": "课程名",
                       required:1,
                         validations:{
                         maxLength:20,
@@ -47,17 +47,17 @@
                     },
                     {
                       "type": "select",
-                      "name": "class_id",
+                      "name": "college",
                       "value":"",
-                      "label": "所在班级",
+                      "label": "学院",
                       "source": "${options}",
                       searchable:true,
                       required:1,
                     },
                     {
                       "type": "text",
-                      "name": "code",
-                      "label": "学号",
+                      "name": "credit",
+                      "label": "学分",
                       
                       validations:{
                         maxLength:20,
@@ -65,58 +65,34 @@
                     },
                    {
                       "type": "text",
-                      "name": "cid",
-                      "label": "身份证",
+                      "name": "semester_hour",
+                      "label": "学时",
                       required:1,
                       validations:{
-                        isLength:18,
+                        maxLength:60,
                       },
                     },
                     {
-                      "type": "date",
-                      "name": "in_time",
-                      "label": "入学时间"
+                      "type": "text",
+                      "name": "number",
+                      "label": "人数"
                     },
                     {
                       "type": "text",
-                      "name": "l_name",
-                      "label": "联系人",
+                      "name": "time",
+                      "label": "上课时间",
+                      required:1,
+                      validations:{
+                        maxLength:60,
+                      },
+                    },
+                    {
+                      "type": "text",
+                      "name": "local",
+                      "label": "上课地点",
                       required:1,
                       validations:{
                         maxLength:20,
-                      },
-                    },
-                    {
-                      "type": "text",
-                      "name": "l_phone",
-                      "label": "联系手机",
-                      required:1,
-                      validations:{
-                        isLength:11,
-                      },
-                    },
-                    {
-                      "type": "text",
-                      "name": "l2_name",
-                      "label": "备用联系人",
-                      validations:{
-                        maxLength:20,
-                      },
-                    },
-                    {
-                      "type": "text",
-                      "name": "l2_phone",
-                      "label": "备用联系手机",
-                      validations:{
-                        isLength:11,
-                      },
-                    },
-                    {
-                      "type": "text",
-                      "name": "add",
-                      "label": "住址",
-                      validations:{
-                        maxLength:85,
                       },
                     },
                     {

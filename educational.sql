@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 05/01/2021 14:41:08
+ Date: 06/01/2021 18:33:19
 */
 
 SET NAMES utf8mb4;
@@ -57,8 +57,8 @@ CREATE TABLE `cc`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `cid` int(0) NOT NULL COMMENT '课程id',
   `class_id` int(0) NOT NULL COMMENT '班级id',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`, `cid`, `class_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cc
@@ -82,7 +82,7 @@ CREATE TABLE `class`  (
   `t_id` int(0) NOT NULL COMMENT '班级管理老师',
   `addtime` int(0) NOT NULL COMMENT '添加时间',
   `user_count` int(0) NOT NULL COMMENT '班级学生人数',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`, `t_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '班级' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -106,7 +106,7 @@ CREATE TABLE `course`  (
   `time` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课时间',
   `local` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课地点',
   `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`, `c_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -119,6 +119,41 @@ INSERT INTO `course` VALUES (4, 4, '程序设计', '信息学院', 4, 64, 30, '�
 INSERT INTO `course` VALUES (5, 5, '历史', '历史学院', 2, 32, 10, '第5周到第12周，第10节到第12节', '科503', '历史');
 
 -- ----------------------------
+-- Table structure for evaluation
+-- ----------------------------
+DROP TABLE IF EXISTS `evaluation`;
+CREATE TABLE `evaluation`  (
+  `id` int(0) NOT NULL,
+  `uid` int(0) NOT NULL COMMENT '学生id',
+  `tid` int(0) NOT NULL COMMENT '老师id',
+  `cid` int(0) NOT NULL COMMENT '课程id',
+  `score` int(0) NOT NULL COMMENT '评分',
+  PRIMARY KEY (`id`, `uid`, `tid`, `cid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of evaluation
+-- ----------------------------
+INSERT INTO `evaluation` VALUES (1, 1, 35, 4, 5);
+
+-- ----------------------------
+-- Table structure for paperselection
+-- ----------------------------
+DROP TABLE IF EXISTS `paperselection`;
+CREATE TABLE `paperselection`  (
+  `id` int(0) NOT NULL,
+  `uid` int(0) NOT NULL COMMENT '学生id',
+  `tid` int(0) NOT NULL COMMENT '老师id',
+  `topic` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '选题题目',
+  `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
+  PRIMARY KEY (`id`, `uid`, `tid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of paperselection
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sc
 -- ----------------------------
 DROP TABLE IF EXISTS `sc`;
@@ -127,8 +162,8 @@ CREATE TABLE `sc`  (
   `uid` int(0) NOT NULL COMMENT '学生id',
   `cid` int(0) NOT NULL COMMENT '课程id',
   `gid` int(0) NOT NULL COMMENT '成绩id',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`, `uid`, `cid`, `gid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sc
@@ -153,7 +188,7 @@ CREATE TABLE `score`  (
   `k_time` int(0) NOT NULL COMMENT '考试时间',
   `score` float(3, 1) NOT NULL COMMENT '分数',
   `kskc` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '考试课程',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`, `uid`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分数表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -187,7 +222,7 @@ CREATE TABLE `student`  (
   `l2_phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '备用联系人手机',
   `add` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '住址',
   `class_id` int(0) NOT NULL COMMENT '班级id',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`, `class_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学生' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -208,7 +243,7 @@ CREATE TABLE `tc`  (
   `id` int(0) NOT NULL,
   `tid` int(0) NOT NULL COMMENT '老师id',
   `cid` int(0) NOT NULL COMMENT '课程id',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`, `tid`, `cid`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -233,7 +268,7 @@ CREATE TABLE `teacher`  (
   `out_time` int(0) NOT NULL COMMENT '离职时间',
   `oa_time` int(0) NOT NULL COMMENT '合同到期时间',
   `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`, `a_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教师' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
