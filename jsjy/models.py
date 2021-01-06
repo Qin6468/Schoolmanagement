@@ -122,8 +122,7 @@ class Course(db.Model):
     """
     课程
     """
-    id = db.Column(db.Integer, primary_key=True)
-    c_id = db.Column(db.Integer)
+    c_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
     college = db.Column(db.String(20), nullable=False)
     credit = db.Column(db.Integer)
@@ -134,8 +133,7 @@ class Course(db.Model):
     info = db.Column(db.Text, nullable=False)
     
 
-    def __init__(self,c_id,name,college,credit,semester_hour,number,time,local,info):
-    	self.c_id=c_id
+    def __init__(self,name,college,credit,semester_hour,number,time,local,info):
     	self.name=name
     	self.college=college
     	self.credit=credit
@@ -146,4 +144,52 @@ class Course(db.Model):
     	self.info=info
 
     def __repr__(self):
+        return '<Course c_id %r>' % self.c_id
+
+class cc(db.Model):
+    """
+    班级课程表
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    cid = db.Column(db.Integer)
+    class_id = db.Column(db.Integer)
+
+    def __init__(self, c_id, class_id):
+        self.c_id = c_id
+        self.class_id = class_id
+    
+    def __repr__(self):
         return '<Course id %r>' % self.id
+
+class sc(db.Model):
+    """
+    学生成绩表
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer)
+    cid = db.Column(db.Integer)
+    gid = db.Column(db.Integer)
+
+    def __init__(self, uid, c_id, gid):
+        self.uid = uid
+        self.c_id = c_id
+        self.gid = gid
+    
+    def __repr__(self):
+        return '<Student id %r>' % self.id
+
+class tc(db.Model):
+    """
+    老师课程表
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    tid = db.Column(db.Integer)
+    cid = db.Column(db.Integer)
+
+    def __init__(self, tid, c_id):
+        self.tid = tid
+        self.c_id = c_id
+    
+    def __repr__(self):
+        return '<Teacher id %r>' % self.id
+

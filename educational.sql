@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 06/01/2021 18:33:19
+ Date: 06/01/2021 23:24:47
 */
 
 SET NAMES utf8mb4;
@@ -30,24 +30,24 @@ CREATE TABLE `admin`  (
   `name` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '姓名',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否启用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 44 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
 INSERT INTO `admin` VALUES (1, 'admin', '516eb11bbeb8a504dda4fd1198e042d7', 'e625fb438d13f7f6defbbacb1f0a6d84', 1, '管理员', 1);
-INSERT INTO `admin` VALUES (43, 'J6eXsZ', 'b6e851e84e9df8b612396bfe8df15f9e', '01976fbe4dba7ba7cfb22fa0e579f642', 2, '最新', 1);
-INSERT INTO `admin` VALUES (42, 'jyHXTa', '2dd97cd23aee6558adb13b160f2bc456', '8cd0123d78b000789312a4fec575e0ee', 2, '最大', 1);
-INSERT INTO `admin` VALUES (41, 'gH8DcY', 'ed095fbfeeaf6f649bf4c007bff80e58', '8d3060365adde62c3aa636fded3d7f60', 2, 'wJ', 1);
-INSERT INTO `admin` VALUES (40, 'Uv9JeQ', '21b028be8fefc04919e0cb83a337a79e', '01e7616debdebfd4e9f3c78c5716027f', 2, 'BA', 1);
-INSERT INTO `admin` VALUES (39, 'DtH8Xa', '15755d9a48ee6ae8d4b44fabcbeb517b', '7870a422703d8025b105730dfff2ccd9', 2, 'gN', 1);
-INSERT INTO `admin` VALUES (38, '5ExnyV', 'ec8bc708c09ce7950464e574f160e84f', '8a25ad0ceda51ae7f9497256b19bade3', 2, 'z5', 1);
-INSERT INTO `admin` VALUES (37, 'LUAsZ4', '0a7ec5b8b2f868349983b85386118072', '3ecb8e363b8d2ac3171b2aadf457a93c', 2, 'NV', 1);
-INSERT INTO `admin` VALUES (36, 'cQSPdf1', 'a59245e544687566963af957c772e987', '3b279677c720dd3e9741a11592c8144a', 2, '大哥223', 1);
 INSERT INTO `admin` VALUES (31, '3bQPve', 'e93fe7552778ded9c169ec54bcafa632', '1aaac9251c500fb3a4bcdce9d21ff8ce', 2, '最小22', 1);
 INSERT INTO `admin` VALUES (32, '8rjZF3', '779fbba718592493009dbfb9f5032e90', 'a7a3b3cfac70baf20f3ab56f03bd2142', 2, '一二三', 0);
 INSERT INTO `admin` VALUES (34, 'z7KJXm', 'add79aa0fd47d468ed47699171a4bd34', '9351cab7ba7db8459102f049e199fe31', 2, '大老师', 1);
 INSERT INTO `admin` VALUES (35, 'cQSPdf', '77e8b39a096fb3984f1985e6baf29674', 'f522a8eb6b9471f49786376d599248f1', 2, '大哥', 1);
+INSERT INTO `admin` VALUES (36, 'cQSPdf1', 'a59245e544687566963af957c772e987', '3b279677c720dd3e9741a11592c8144a', 2, '大哥223', 1);
+INSERT INTO `admin` VALUES (37, 'LUAsZ4', '0a7ec5b8b2f868349983b85386118072', '3ecb8e363b8d2ac3171b2aadf457a93c', 2, 'NV', 1);
+INSERT INTO `admin` VALUES (38, '5ExnyV', 'ec8bc708c09ce7950464e574f160e84f', '8a25ad0ceda51ae7f9497256b19bade3', 2, 'z5', 1);
+INSERT INTO `admin` VALUES (39, 'DtH8Xa', '15755d9a48ee6ae8d4b44fabcbeb517b', '7870a422703d8025b105730dfff2ccd9', 2, 'gN', 1);
+INSERT INTO `admin` VALUES (40, 'Uv9JeQ', '21b028be8fefc04919e0cb83a337a79e', '01e7616debdebfd4e9f3c78c5716027f', 2, 'BA', 1);
+INSERT INTO `admin` VALUES (41, 'gH8DcY', 'ed095fbfeeaf6f649bf4c007bff80e58', '8d3060365adde62c3aa636fded3d7f60', 2, 'wJ', 1);
+INSERT INTO `admin` VALUES (42, 'jyHXTa', '2dd97cd23aee6558adb13b160f2bc456', '8cd0123d78b000789312a4fec575e0ee', 2, '最大', 1);
+INSERT INTO `admin` VALUES (43, 'J6eXsZ', 'b6e851e84e9df8b612396bfe8df15f9e', '01976fbe4dba7ba7cfb22fa0e579f642', 2, '最新', 1);
 
 -- ----------------------------
 -- Table structure for cc
@@ -55,9 +55,13 @@ INSERT INTO `admin` VALUES (35, 'cQSPdf', '77e8b39a096fb3984f1985e6baf29674', 'f
 DROP TABLE IF EXISTS `cc`;
 CREATE TABLE `cc`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `cid` int(0) NOT NULL COMMENT '课程id',
+  `c_id` int(0) NOT NULL COMMENT '课程id',
   `class_id` int(0) NOT NULL COMMENT '班级id',
-  PRIMARY KEY (`id`, `cid`, `class_id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `c_id`(`c_id`) USING BTREE,
+  INDEX `class_id`(`class_id`) USING BTREE,
+  CONSTRAINT `c_id` FOREIGN KEY (`c_id`) REFERENCES `course` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `class_id` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -82,8 +86,11 @@ CREATE TABLE `class`  (
   `t_id` int(0) NOT NULL COMMENT '班级管理老师',
   `addtime` int(0) NOT NULL COMMENT '添加时间',
   `user_count` int(0) NOT NULL COMMENT '班级学生人数',
-  PRIMARY KEY (`id`, `t_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '班级' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `id`(`id`) USING BTREE,
+  INDEX `t_id`(`t_id`) USING BTREE,
+  CONSTRAINT `t_id` FOREIGN KEY (`t_id`) REFERENCES `teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '班级' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of class
@@ -96,7 +103,6 @@ INSERT INTO `class` VALUES (4, '三班', 17, 1607061051, 4);
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course`  (
-  `id` int(0) NOT NULL,
   `c_id` int(0) NOT NULL COMMENT '课程id',
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程名',
   `college` char(18) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '院系',
@@ -106,17 +112,18 @@ CREATE TABLE `course`  (
   `time` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课时间',
   `local` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '上课地点',
   `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
-  PRIMARY KEY (`id`, `c_id`) USING BTREE
+  PRIMARY KEY (`c_id`) USING BTREE,
+  INDEX `c_id`(`c_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 1, '语文', '文法学院', 4, 64, 20, '第1周到第14周，星期一，第1节到第4节', '教103', '语文');
-INSERT INTO `course` VALUES (2, 2, '英语', '文法学院', 4, 64, 20, '第1周到第14周，星期二，第6节到第9节', '教203', 'English');
-INSERT INTO `course` VALUES (3, 3, '数学', '理学院', 5, 80, 20, '第1周到第16周，星期三，第1节到第4节', '教302', '数学');
-INSERT INTO `course` VALUES (4, 4, '程序设计', '信息学院', 4, 64, 30, '第1周到第14周，星期四，第6节到第9节', '科103', '程序');
-INSERT INTO `course` VALUES (5, 5, '历史', '历史学院', 2, 32, 10, '第5周到第12周，第10节到第12节', '科503', '历史');
+INSERT INTO `course` VALUES (1, '语文', '文法学院', 4, 64, 20, '第1周到第14周，星期一，第1节到第4节', '教103', '语文');
+INSERT INTO `course` VALUES (2, '英语', '文法学院', 4, 64, 20, '第1周到第14周，星期二，第6节到第9节', '教203', 'English');
+INSERT INTO `course` VALUES (3, '数学', '理学院', 5, 80, 20, '第1周到第16周，星期三，第1节到第4节', '教302', '数学');
+INSERT INTO `course` VALUES (4, '程序设计', '信息学院', 4, 64, 30, '第1周到第14周，星期四，第6节到第9节', '科103', '程序');
+INSERT INTO `course` VALUES (5, '历史', '历史学院', 2, 32, 10, '第5周到第12周，第10节到第12节', '科503', '历史');
 
 -- ----------------------------
 -- Table structure for evaluation
@@ -126,15 +133,23 @@ CREATE TABLE `evaluation`  (
   `id` int(0) NOT NULL,
   `uid` int(0) NOT NULL COMMENT '学生id',
   `tid` int(0) NOT NULL COMMENT '老师id',
-  `cid` int(0) NOT NULL COMMENT '课程id',
+  `c_id` int(0) NOT NULL COMMENT '课程id',
   `score` int(0) NOT NULL COMMENT '评分',
-  PRIMARY KEY (`id`, `uid`, `tid`, `cid`) USING BTREE
+  `commit` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `uid`(`uid`) USING BTREE,
+  INDEX `tid`(`tid`) USING BTREE,
+  INDEX `c_id1`(`c_id`) USING BTREE,
+  CONSTRAINT `c_id1` FOREIGN KEY (`c_id`) REFERENCES `course` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tid` FOREIGN KEY (`tid`) REFERENCES `teacher` (`a_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of evaluation
 -- ----------------------------
-INSERT INTO `evaluation` VALUES (1, 1, 35, 4, 5);
+INSERT INTO `evaluation` VALUES (1, 1, 35, 4, 5, NULL);
+INSERT INTO `evaluation` VALUES (2, 2, 34, 5, 4, NULL);
 
 -- ----------------------------
 -- Table structure for paperselection
@@ -144,14 +159,20 @@ CREATE TABLE `paperselection`  (
   `id` int(0) NOT NULL,
   `uid` int(0) NOT NULL COMMENT '学生id',
   `tid` int(0) NOT NULL COMMENT '老师id',
-  `topic` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '选题题目',
-  `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '简介',
-  PRIMARY KEY (`id`, `uid`, `tid`) USING BTREE
+  `topic` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '选题题目',
+  `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `uid1`(`uid`) USING BTREE,
+  INDEX `tid2`(`tid`) USING BTREE,
+  CONSTRAINT `tid2` FOREIGN KEY (`tid`) REFERENCES `teacher` (`a_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `uid1` FOREIGN KEY (`uid`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of paperselection
 -- ----------------------------
+INSERT INTO `paperselection` VALUES (1, 1, 35, 'web开发', 'web，js，php');
+INSERT INTO `paperselection` VALUES (2, 2, 34, '唐朝历史研究', '唐朝');
 
 -- ----------------------------
 -- Table structure for sc
@@ -160,9 +181,15 @@ DROP TABLE IF EXISTS `sc`;
 CREATE TABLE `sc`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `uid` int(0) NOT NULL COMMENT '学生id',
-  `cid` int(0) NOT NULL COMMENT '课程id',
+  `c_id` int(0) NOT NULL COMMENT '课程id',
   `gid` int(0) NOT NULL COMMENT '成绩id',
-  PRIMARY KEY (`id`, `uid`, `cid`, `gid`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `uid2`(`uid`) USING BTREE,
+  INDEX `c_id2`(`c_id`) USING BTREE,
+  INDEX `gid`(`gid`) USING BTREE,
+  CONSTRAINT `cid2` FOREIGN KEY (`c_id`) REFERENCES `course` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gid` FOREIGN KEY (`gid`) REFERENCES `score` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `uid2` FOREIGN KEY (`uid`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -188,8 +215,10 @@ CREATE TABLE `score`  (
   `k_time` int(0) NOT NULL COMMENT '考试时间',
   `score` float(3, 1) NOT NULL COMMENT '分数',
   `kskc` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '考试课程',
-  PRIMARY KEY (`id`, `uid`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分数表' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `uid3`(`uid`) USING BTREE,
+  CONSTRAINT `uid3` FOREIGN KEY (`uid`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分数表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of score
@@ -222,8 +251,8 @@ CREATE TABLE `student`  (
   `l2_phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '备用联系人手机',
   `add` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '住址',
   `class_id` int(0) NOT NULL COMMENT '班级id',
-  PRIMARY KEY (`id`, `class_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学生' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学生' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student
@@ -242,8 +271,12 @@ DROP TABLE IF EXISTS `tc`;
 CREATE TABLE `tc`  (
   `id` int(0) NOT NULL,
   `tid` int(0) NOT NULL COMMENT '老师id',
-  `cid` int(0) NOT NULL COMMENT '课程id',
-  PRIMARY KEY (`id`, `tid`, `cid`) USING BTREE
+  `c_id` int(0) NOT NULL COMMENT '课程id',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `tid3`(`tid`) USING BTREE,
+  INDEX `cid3`(`c_id`) USING BTREE,
+  CONSTRAINT `cid3` FOREIGN KEY (`c_id`) REFERENCES `course` (`c_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tid3` FOREIGN KEY (`tid`) REFERENCES `teacher` (`a_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -268,16 +301,17 @@ CREATE TABLE `teacher`  (
   `out_time` int(0) NOT NULL COMMENT '离职时间',
   `oa_time` int(0) NOT NULL COMMENT '合同到期时间',
   `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
-  PRIMARY KEY (`id`, `a_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教师' ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `a_id`(`a_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教师' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES (16, 35, 'c语言老师', '513723199112024634', 1609344000, 1607011200, 1606924800, '<p>啦啦啦</p>');
-INSERT INTO `teacher` VALUES (15, 34, '历史老师', '513723199112024633', 1606838400, 1608825600, 1609344000, '<p>萨达</p>');
 INSERT INTO `teacher` VALUES (12, 31, '数学老师', '513723199112024631', 0, 0, 0, '');
 INSERT INTO `teacher` VALUES (13, 32, '英语老师', '513723199112024632', 0, 1608739200, 1608912000, '');
+INSERT INTO `teacher` VALUES (15, 34, '历史老师', '513723199112024633', 1606838400, 1608825600, 1609344000, '<p>萨达</p>');
+INSERT INTO `teacher` VALUES (16, 35, 'c语言老师', '513723199112024634', 1609344000, 1607011200, 1606924800, '<p>啦啦啦</p>');
 INSERT INTO `teacher` VALUES (17, 36, '语文老师', '513723199112024635', 1606924800, 1607011200, 1606924800, '<p>啦啦啦2</p>');
 INSERT INTO `teacher` VALUES (18, 37, 'NV', '513723199112024635', 0, 0, 0, '');
 INSERT INTO `teacher` VALUES (19, 38, 'z5', '513723199112024635', 0, 0, 0, '');

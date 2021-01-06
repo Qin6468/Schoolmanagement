@@ -49,7 +49,6 @@ def get_course():
 	tc = db_tc.order_by(order).filter(*where).limit(perPage).offset(offset) 
 	for t in tc:
 		temp.append({
-		'id':t.id,
 		'c_id':t.c_id,
 		'name':t.name,
 		'credit':t.credit,
