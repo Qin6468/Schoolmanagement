@@ -227,11 +227,15 @@
           	      },
           	      {
           	        "name": "status",
-          	        "type":"switch",
-          	        "label": "是否开启",
-          	        "quickEdit":{
-  	                   "type": "switch",
-          	        },
+          	        "type":"status",
+					"value":1,
+					"label":"是否入职",
+					"buttons": [
+					{"tooltip": "离职",
+					"type": "button",
+					"icon": "fa fa-times text-danger",
+				    },
+					]
           	      },
 
           	      {
@@ -309,7 +313,14 @@
       			      	              "type": "date",
       			      	              "name": "out_time",
       			      	              "label": "离职时间"
-      			      	            },
+									},
+							        {
+										"type": "switch",
+										"name": "status",
+										"trueValue":1,
+                                        "falseValue":0,
+										"label": "是否在职"
+									},
       			      	            {
       			      	                    "type": "rich-text",
       			      	                    "name": "info",
