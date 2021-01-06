@@ -3,13 +3,13 @@ import hashlib,time
 from jsjy.models import db, Admin,Teacher
 from jsjy.public import r
 
-users=Blueprint('users',__name__)
+teachers=Blueprint('teachers',__name__)
 
-@users.route('/users')
+@teachers.route('/teachers')
 def index():
-	return render_template('/account/users.html')
+	return render_template('/account/teachers.html')
 #获取用户
-@users.route('/userdata',methods=['GET'])
+@teachers.route('/teachersdata',methods=['GET'])
 def userdata():
 	perPage=int(request.values.get('perPage'))
 	page=int(request.values.get('page'))
@@ -72,14 +72,14 @@ def userdata():
 	# rt['hasNext']=1
 	return r(rt)
 #删除用户
-@users.route('/userdata/<int:uid>',methods=['DELETE'])
+@teachers.route('/userdata/<int:uid>',methods=['DELETE'])
 def delete_user(uid):
 	sql=db.session.query(Admin).filter_by(id=uid).filter(Admin.level != 1).delete()
 	sql2=db.session.query(Teacher).filter_by(a_id=uid).delete()
 	db.session.commit()
 	return r({},0,'删除成功')
 #重置密码为123456
-@users.route('/userdata/repwd/<int:uid>',methods=['PUT'])
+@teachers.route('/userdata/repwd/<int:uid>',methods=['PUT'])
 def repwd_user(uid):
 	#重置密码为123456
 	user = db.session.query(Admin).filter_by(id=uid).first()
@@ -93,7 +93,7 @@ def repwd_user(uid):
 	return r({},0,'重置成功')
 
 #添加用户
-@users.route('/userdata',methods=['POST'])
+@teachers.route('/userdata',methods=['POST'])
 def add_user():
 	data = request.get_data()
 	j_data =  json.loads(data)
@@ -117,7 +117,7 @@ def add_user():
 	db.session.commit()
 	return r({},0,'添加成功')
 #修改用户
-@users.route('/userdata/<int:uid>',methods=['PUT'])
+@teachers.route('/userdata/<int:uid>',methods=['PUT'])
 def edit_user(uid):
 	data = request.get_data()
 	j_data =  json.loads(data)
@@ -149,7 +149,7 @@ def edit_user(uid):
 	db.session.commit()
 	return r({},0,'修改成功')
 #获取id名字，用于前端选择
-@users.route('/userdata/minlist',methods=['GET'])
+@teachers.route('/userdata/minlist',methods=['GET'])
 def get_minlist():
 	data=db.session.query(Teacher.id,Teacher.name).order_by(Teacher.id.desc()).all()
 	re=[];

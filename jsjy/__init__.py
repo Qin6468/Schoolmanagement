@@ -10,7 +10,7 @@ from .view.course import course#课程
 def create_app():
 	app=Flask(__name__)
 	app.config.from_object('config.Dev')
-	app.config['SEND_FILE_MAX_AGE_DEFAULT']=timedelta(seconds=1)
+	# app.config['SEND_FILE_MAX_AGE_DEFAULT']=timedelta(seconds=1)
 	db = SQLAlchemy(app)
 	app.register_blueprint(account)
 	app.register_blueprint(users)
