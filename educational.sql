@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 07/01/2021 15:07:48
+ Date: 07/01/2021 15:52:41
 */
 
 SET NAMES utf8mb4;
@@ -165,6 +165,7 @@ CREATE TABLE `paperselection`  (
   `tid` int(0) NOT NULL COMMENT '老师id',
   `topic` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '选题题目',
   `info` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '简介',
+  `status` int(0) NOT NULL COMMENT '选题状态，0为未选，1为已选',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid1`(`uid`) USING BTREE,
   INDEX `tid2`(`tid`) USING BTREE,
@@ -175,8 +176,8 @@ CREATE TABLE `paperselection`  (
 -- ----------------------------
 -- Records of paperselection
 -- ----------------------------
-INSERT INTO `paperselection` VALUES (1, 1, 35, 'web开发', 'web，js，php');
-INSERT INTO `paperselection` VALUES (2, 2, 34, '唐朝历史研究', '唐朝');
+INSERT INTO `paperselection` VALUES (1, 1, 35, 'web开发', 'web，js，php', 1);
+INSERT INTO `paperselection` VALUES (2, 2, 34, '唐朝历史研究', '唐朝', 0);
 
 -- ----------------------------
 -- Table structure for sc
