@@ -154,7 +154,7 @@ class cc(db.Model):
     班级课程表
     """
     id = db.Column(db.Integer, primary_key=True)
-    cid = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
     class_id = db.Column(db.Integer, db.ForeignKey('Class.id'))
 
     def __init__(self, c_id, class_id):
@@ -170,7 +170,7 @@ class sc(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
-    cid = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
     gid = db.Column(db.Integer, db.ForeignKey('Score.id'))
 
     def __init__(self, uid, c_id, gid):
@@ -187,7 +187,7 @@ class tc(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
-    cid = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
 
     def __init__(self, tid, c_id):
         self.tid = tid
@@ -195,4 +195,52 @@ class tc(db.Model):
     
     def __repr__(self):
         return '<Teacher id %r>' % self.id
+
+class Evaluation(db.Model):
+    """
+    教师评价
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
+    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    score1 = db.Column(db.Integer)
+    score2 = db.Column(db.Integer)
+    score3 = db.Column(db.Integer)
+    score4 = db.Column(db.Integer)
+    score5 = db.Column(db.Integer)
+    commit = db.Column(db.String(60))
+
+    def __init__(self, uid, tid, c_id, score1, score2, score3, score4, score5, commit):
+        self.uid = uid
+        self.tid = tid
+        self.c_id = c_id
+        self.score1 = score1
+        self.score2 = score2
+        self.score3 = score3
+        self.score4 = score4
+        self.score5 = score5
+        self.commit = commit
+    
+    def __repr__(self):
+        return '<Evaluation id %r>' % self.id
+    
+class Paperselection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
+    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
+    topic = db.Column(db.String(20), nullable=False)
+    info = db.Column(db.Text, nullable=False)
+    status = db.Column(db.Integer)
+
+    def __init__(self, uid, tid, topic, info, status):
+        self.uid = uid
+        self.tid = tid
+        self.topic = topic
+        self.info = info
+        self.status = status
+    
+    def __repr__(self):
+        return '<Paperselection id %r>' % self.id
+
 
