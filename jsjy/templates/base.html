@@ -174,7 +174,22 @@
               考试得分
              </div>
           </li>
-
+          <li class="a-AsideNav-item {% if request.path == '/evaluation' %}is-open is-active{% endif %}">
+            <a href="/evaluation">
+              <i class="a-AsideNav-itemIcon fa fa-pencil-square-o"></i>
+              <span class="a-AsideNav-itemLabel">教师评价</span>
+            </a> 
+           <div class="a-AsideNav-tooltip">
+            教师评价
+           </div>
+           <li class="a-AsideNav-item {% if request.path == '/paperselection' %}is-open is-active{% endif %}">
+            <a href="/paperselection">
+              <i class="a-AsideNav-itemIcon fa fa-star"></i>
+              <span class="a-AsideNav-itemLabel">论文选题</span>
+            </a> 
+           <div class="a-AsideNav-tooltip">
+            论文选题
+           </div>
          </ul> 
         </nav> 
         <!--导航结束--> 
