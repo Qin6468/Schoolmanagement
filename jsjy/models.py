@@ -55,6 +55,7 @@ class Class(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     t_id = db.Column(db.Integer)
+    # t_id = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
     name = db.Column(db.String(60), nullable=False)
     addtime = db.Column(db.Integer)
     user_count = db.Column(db.Integer)
@@ -73,6 +74,7 @@ class Student(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(db.Integer)
+    # class_id = db.Column(db.Integer, db.ForeignKey('Class.id'))
     name = db.Column(db.String(60), nullable=False)
     code = db.Column(db.String(20), nullable=False)
     cid = db.Column(db.String(18), nullable=False)
@@ -101,12 +103,14 @@ class Student(db.Model):
 
     def __repr__(self):
         return '<Student id %r>' % self.id
+
 class Score(db.Model):
     """
     学生
     """
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer)
+    # uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
     score = db.Column(db.Float(3,1), nullable=False)
     k_time = db.Column(db.Integer)
     kskc = db.Column(db.String(60), nullable=False)
@@ -131,7 +135,6 @@ class Course(db.Model):
     time = db.Column(db.String(60), nullable=False)
     local=db.Column(db.String(60), nullable=False)
     info = db.Column(db.Text, nullable=False)
-    
 
     def __init__(self,name,college,credit,semester_hour,number,time,local,info):
     	self.name=name
@@ -151,8 +154,8 @@ class cc(db.Model):
     班级课程表
     """
     id = db.Column(db.Integer, primary_key=True)
-    cid = db.Column(db.Integer)
-    class_id = db.Column(db.Integer)
+    cid = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    class_id = db.Column(db.Integer, db.ForeignKey('Class.id'))
 
     def __init__(self, c_id, class_id):
         self.c_id = c_id
@@ -166,9 +169,9 @@ class sc(db.Model):
     学生成绩表
     """
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer)
-    cid = db.Column(db.Integer)
-    gid = db.Column(db.Integer)
+    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
+    cid = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    gid = db.Column(db.Integer, db.ForeignKey('Score.id'))
 
     def __init__(self, uid, c_id, gid):
         self.uid = uid
@@ -183,8 +186,8 @@ class tc(db.Model):
     老师课程表
     """
     id = db.Column(db.Integer, primary_key=True)
-    tid = db.Column(db.Integer)
-    cid = db.Column(db.Integer)
+    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
+    cid = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
 
     def __init__(self, tid, c_id):
         self.tid = tid
