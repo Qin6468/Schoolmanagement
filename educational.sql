@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 06/01/2021 23:24:47
+ Date: 07/01/2021 15:07:48
 */
 
 SET NAMES utf8mb4;
@@ -134,7 +134,11 @@ CREATE TABLE `evaluation`  (
   `uid` int(0) NOT NULL COMMENT '学生id',
   `tid` int(0) NOT NULL COMMENT '老师id',
   `c_id` int(0) NOT NULL COMMENT '课程id',
-  `score` int(0) NOT NULL COMMENT '评分',
+  `score1` int(0) NOT NULL COMMENT '教学态度',
+  `score2` int(0) NOT NULL COMMENT '教学效果',
+  `score3` int(0) NOT NULL COMMENT '作业安排',
+  `score4` int(0) NOT NULL COMMENT '教案准备',
+  `score5` int(0) NOT NULL COMMENT '道德规范',
   `commit` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE,
@@ -148,8 +152,8 @@ CREATE TABLE `evaluation`  (
 -- ----------------------------
 -- Records of evaluation
 -- ----------------------------
-INSERT INTO `evaluation` VALUES (1, 1, 35, 4, 5, NULL);
-INSERT INTO `evaluation` VALUES (2, 2, 34, 5, 4, NULL);
+INSERT INTO `evaluation` VALUES (1, 1, 35, 4, 5, 5, 5, 5, 5, '认真负责，讲的好');
+INSERT INTO `evaluation` VALUES (2, 2, 34, 5, 5, 5, 5, 5, 5, NULL);
 
 -- ----------------------------
 -- Table structure for paperselection
