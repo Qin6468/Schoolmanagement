@@ -55,6 +55,7 @@ class Class(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     t_id = db.Column(db.Integer)
+    # t_id = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
     name = db.Column(db.String(60), nullable=False)
     addtime = db.Column(db.Integer)
     user_count = db.Column(db.Integer)
@@ -73,6 +74,7 @@ class Student(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     class_id = db.Column(db.Integer)
+    # class_id = db.Column(db.Integer, db.ForeignKey('Class.id'))
     name = db.Column(db.String(60), nullable=False)
     code = db.Column(db.String(20), nullable=False)
     cid = db.Column(db.String(18), nullable=False)
@@ -101,12 +103,14 @@ class Student(db.Model):
 
     def __repr__(self):
         return '<Student id %r>' % self.id
+
 class Score(db.Model):
     """
     学生
     """
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer)
+    # uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
     score = db.Column(db.Float(3,1), nullable=False)
     k_time = db.Column(db.Integer)
     kskc = db.Column(db.String(60), nullable=False)
@@ -122,8 +126,7 @@ class Course(db.Model):
     """
     课程
     """
-    id = db.Column(db.Integer, primary_key=True)
-    c_id = db.Column(db.Integer)
+    c_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), nullable=False)
     college = db.Column(db.String(20), nullable=False)
     credit = db.Column(db.Integer)
@@ -132,10 +135,8 @@ class Course(db.Model):
     time = db.Column(db.String(60), nullable=False)
     local=db.Column(db.String(60), nullable=False)
     info = db.Column(db.Text, nullable=False)
-    
 
-    def __init__(self,c_id,name,college,credit,semester_hour,number,time,local,info):
-    	self.c_id=c_id
+    def __init__(self,name,college,credit,semester_hour,number,time,local,info):
     	self.name=name
     	self.college=college
     	self.credit=credit
@@ -146,4 +147,100 @@ class Course(db.Model):
     	self.info=info
 
     def __repr__(self):
+        return '<Course c_id %r>' % self.c_id
+
+class cc(db.Model):
+    """
+    班级课程表
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    class_id = db.Column(db.Integer, db.ForeignKey('Class.id'))
+
+    def __init__(self, c_id, class_id):
+        self.c_id = c_id
+        self.class_id = class_id
+    
+    def __repr__(self):
         return '<Course id %r>' % self.id
+
+class sc(db.Model):
+    """
+    学生成绩表
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    gid = db.Column(db.Integer, db.ForeignKey('Score.id'))
+
+    def __init__(self, uid, c_id, gid):
+        self.uid = uid
+        self.c_id = c_id
+        self.gid = gid
+    
+    def __repr__(self):
+        return '<Student id %r>' % self.id
+
+class tc(db.Model):
+    """
+    老师课程表
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+
+    def __init__(self, tid, c_id):
+        self.tid = tid
+        self.c_id = c_id
+    
+    def __repr__(self):
+        return '<Teacher id %r>' % self.id
+
+class Evaluation(db.Model):
+    """
+    教师评价
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
+    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
+    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    score1 = db.Column(db.Integer)
+    score2 = db.Column(db.Integer)
+    score3 = db.Column(db.Integer)
+    score4 = db.Column(db.Integer)
+    score5 = db.Column(db.Integer)
+    commit = db.Column(db.String(60))
+
+    def __init__(self, uid, tid, c_id, score1, score2, score3, score4, score5, commit):
+        self.uid = uid
+        self.tid = tid
+        self.c_id = c_id
+        self.score1 = score1
+        self.score2 = score2
+        self.score3 = score3
+        self.score4 = score4
+        self.score5 = score5
+        self.commit = commit
+    
+    def __repr__(self):
+        return '<Evaluation id %r>' % self.id
+    
+class Paperselection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
+    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
+    topic = db.Column(db.String(20), nullable=False)
+    info = db.Column(db.Text, nullable=False)
+    status = db.Column(db.Integer)
+
+    def __init__(self, uid, tid, topic, info, status):
+        self.uid = uid
+        self.tid = tid
+        self.topic = topic
+        self.info = info
+        self.status = status
+    
+    def __repr__(self):
+        return '<Paperselection id %r>' % self.id
+
+
