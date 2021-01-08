@@ -227,16 +227,18 @@ class Evaluation(db.Model):
     def __repr__(self):
         return '<Evaluation id %r>' % self.id
     
-class Paperselection(db.Model):
+class Thesis(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
-    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
+    t_id= db.Column(db.String(20)) #论文id
+    sid = db.Column(db.String(20)) #学生
+    tid = db.Column(db.String(20)) #老师
     topic = db.Column(db.String(20), nullable=False)
     info = db.Column(db.Text, nullable=False)
     status = db.Column(db.Integer)
 
-    def __init__(self, uid, tid, topic, info, status):
-        self.uid = uid
+    def __init__(self, t_id, sid, tid, topic, info, status):
+        self.t_id = t_id
+        self.sid = sid
         self.tid = tid
         self.topic = topic
         self.info = info
