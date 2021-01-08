@@ -126,7 +126,8 @@ class Course(db.Model):
     """
     课程
     """
-    c_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    c_id = db.Column(db.Integer)
     name = db.Column(db.String(60), nullable=False)
     college = db.Column(db.String(20), nullable=False)
     credit = db.Column(db.Integer)
@@ -136,15 +137,16 @@ class Course(db.Model):
     local=db.Column(db.String(60), nullable=False)
     info = db.Column(db.Text, nullable=False)
 
-    def __init__(self,name,college,credit,semester_hour,number,time,local,info):
-    	self.name=name
-    	self.college=college
-    	self.credit=credit
-    	self.semester_hour=semester_hour
-    	self.number=number
-    	self.time=time
-    	self.local=local
-    	self.info=info
+    def __init__(self,c_id,name,college,credit,semester_hour,number,time,local,info):
+        self.c_id=c_id
+        self.name=name
+        self.college=college
+        self.credit=credit
+        self.semester_hour=semester_hour
+        self.number=number
+        self.time=time
+        self.local=local
+        self.info=info
 
     def __repr__(self):
         return '<Course c_id %r>' % self.c_id
