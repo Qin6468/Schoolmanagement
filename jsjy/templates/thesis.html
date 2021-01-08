@@ -17,13 +17,13 @@
     }
  		// 添加按钮
  		addjson={
-      	      "label": "教师评价",
+      	      "label": "论文选题",
       	      "type": "button",
       	      "actionType": "dialog",
       	      "level": "success",
       	      // "className": "m-b-sm",
       	      "dialog": {
-      	        "title": "教师评价",
+      	        "title": "论文选题",
       	        "size":'md',
       	        "body": {
       	          "type": "form",
@@ -42,7 +42,7 @@
                       "label": "学生id",
                       required:1,
                         validations:{
-                        maxLength:20,
+                        isLength:18,
                       },
                     },
                     {
@@ -50,52 +50,23 @@
                       "name": "tid",
                       "label": "老师id",
                       required:1,
-                      validations:{
-                        maxLength:20,
-                      },
                     },
                    {
                       "type": "text",
-                      "name": "c_id",
-                      "label": "课程id",
+                      "name": "topic",
+                      "label": "选题题目",
                       required:1,
-                      validations:{
-                        maxLength:20,
-                      },
                     },
                     {
                       "type": "text",
-                      "name": "score1",
-                      "label": "教学态度"
-                    },
-                    {
-                      "type": "text",
-                      "name": "score2",
-                      "label": "教学效果"
-                    },
-                    {
-                      "type": "text",
-                      "name": "score3",
-                      "label": "作业安排"
-                    },
-                    {
-                      "type": "text",
-                      "name": "score4",
-                      "label": "教案准备"
-                    },
-                    {
-                      "type": "text",
-                      "name": "score5",
-                      "label": "道德规范"
-                    },
-                    {
-                      "type": "text",
-                      "name": "commit",
-                      "label": "评论",
+                      "name": "status",
+                      "label": "选题状态",
                       required:1,
-                      validations:{
-                        maxLength:60,
-                      },
+                    },
+                    {
+                      "type": "textarea",
+                      "name": "info",
+                      "label": "简介",
                     },
                     
       	          ]
@@ -178,7 +149,7 @@
           	        "name": "t_id",
                     "sortable": true,
           	        "label": "ID",
-                    "width":50,
+                    "width":100,
           	      },
           	      {
                     "name": "sid",
