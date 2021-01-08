@@ -40,19 +40,11 @@
                       "type": "text",
                       "name": "c_id",
                       "label": "课程ID",
-                      required:1,
-                        validations:{
-                        maxLength:20,
-                      },
                     },
       	            {
                       "type": "text",
                       "name": "name",
                       "label": "课程名",
-                      required:1,
-                        validations:{
-                        maxLength:20,
-                      },
                     },
                     {
                       "type": "select",
@@ -61,25 +53,16 @@
                       "label": "学院",
                       "source": "${courseopt}",
                       searchable:true,
-                      required:1,
                     },
                     {
                       "type": "text",
                       "name": "credit",
                       "label": "学分",
-                      required:1,
-                      validations:{
-                        maxLength:20,
-                      },
                     },
                    {
                       "type": "text",
                       "name": "semester_hour",
                       "label": "学时",
-                      required:1,
-                      validations:{
-                        maxLength:60,
-                      },
                     },
                     {
                       "type": "text",
@@ -90,27 +73,18 @@
                       "type": "text",
                       "name": "time",
                       "label": "上课时间",
-                      required:1,
-                      validations:{
-                        maxLength:60,
-                      },
                     },
                     {
                       "type": "text",
                       "name": "local",
                       "label": "上课地点",
-                      required:1,
-                      validations:{
-                        maxLength:20,
-                      },
+
                     },
                     {
                       "type": "textarea",
                       "name": "info",
                       "label": "简介",
-                      validations:{
-                        maxLength:85,
-                      },
+
                     },
       	          ]
       	        }

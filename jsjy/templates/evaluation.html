@@ -33,7 +33,7 @@
       	                // 'name':randomPassword(2),
       	                'cid':'513723199112023637',
   	              },
-      	          "api": "post:/course",
+      	          "api": "post:/evaluation",
       	          "reload": "window",
       	          "controls": [
       	            {
@@ -80,7 +80,7 @@
                       "label": "道德规范"
                     },
                     {
-                      "type": "text",
+                      "type": "textarea",
                       "name": "commit",
                       "label": "评论",
 
@@ -103,7 +103,7 @@
                       "type": "form",
                       "data": {
                       },
-                      "api": "put:/studentlist/${id}",
+                      "api": "put:/evaluationlist/${id}",
                       "reload": "window",
                       controls:addjson['dialog']['body']['controls']
                     }
@@ -115,7 +115,7 @@
         amis.embed("#main", {
           type: "page",
           title: "课程列表",
-          initApi: "/courselist/minlist",
+          initApi: "/evaluationlist/minlist",
           // subTitle: "展示一些常规的表单，包括验证、提示等等",
           body: [
           	{
@@ -124,10 +124,10 @@
           	    "type": "crud",
           	    syncLocation: false,
           	    "api": "/courselist",
-          	    "quickSaveItemApi": "put:/courselist/${id}",
+          	    "quickSaveItemApi": "put:/evaluationlist/${id}",
           	    "saveImmediately":true,
                 //2010-1-5    
-                  "name":"courselist",
+                  "name":"evaluationlist",
           	    "filterTogglable": true,
           	  	"headerToolbar": [
           			addjson,
@@ -251,7 +251,7 @@
   	                  "actionType": "ajax",
   	                  // "level": "danger",
   	                  "confirmText": "确认要删除？",
-  	                  "api": "delete:/courselist/${id}"
+  	                  "api": "delete:/evaluationlist/${id}"
   	                },
   	                 editbutton
   	              ]
