@@ -205,7 +205,7 @@
         // 用 amis 的 sdk 渲染内容区
         amis.embed("#main", {
           type: "page",
-          title: "课程列表",
+          title: "教师评价",
           //initApi: "/evaluationlist/minlist",
           // subTitle: "展示一些常规的表单，包括验证、提示等等",
           body: [
@@ -235,13 +235,13 @@
                   "name": "id",
                   "sortable": true,
                   "label": "ID",
-                  "width":150,
+                  "width":30,
                 },
           	      {
           	        "name": "sid",
                     "sortable": true,
           	        "label": "学生ID",
-                    "width":150,
+                    "width":50,
                   },
           	      {
                     "name": "c_id",
@@ -253,7 +253,7 @@
                        },
                     },
                     "fixed": "left",
-                    "width":100,
+                    "width":50,
                     "label": "课程ID"
                   },
                   {
@@ -264,60 +264,55 @@
                   },
                   {
                     "name": "score1",
-                    "searchable": true,
-                    "quickEdit": {
-                      "type": "text",
-                       validations:{
-                        maxLength:20,
-                       },
+                    "sortable": true,
+                    "quickEdit":{
+                      "mode": "inline",
+                      "type": "rating",
+                      "count": 5,
                     },
                     "width":100,
                     "label": "教学态度"
                   },
                   {
                     "name": "score2",
-                    "searchable": true,
-                    "quickEdit": {
-                      "type": "text",
-                       validations:{
-                        maxLength:20,
-                       },
+                    "sortable": true,
+                    "quickEdit":{
+                      "mode": "inline",
+                      "type": "rating",
+                      "count": 5,
                     },
                     "width":100,
                     "label": "教学效果"
                   },
                   {
                     "name": "score3",
-                    "searchable": true,
-                    "quickEdit": {
-                      "type": "text",
-                       validations:{
-                        maxLength:20,
-                       },
+                    "sortable": true,
+                    "quickEdit":{
+                      "mode": "inline",
+                      "type": "rating",
+                      "count": 5,
                     },
                     "width":100,
                     "label": "作业安排"
                   },
                   {
                     "name": "score4",
-                    "searchable": true,
-                    "quickEdit": {
-                      "type": "text",
-                       validations:{
-                        maxLength:20,
-                       },
+                    "sortable": true,
+                    "quickEdit":{
+                      "mode": "inline",
+                      "type": "rating",
+                      "count": 5,
                     },
                     "width":100,
                     "label": "教案准备"
                   },
                   {
                     "name": "score5",
-                    "searchable": true,
-                    "quickEdit": {
-                      "type": "text",
-                       validations:{
-                        maxLength:20,
-                       },
+                    "sortable": true,
+                    "quickEdit":{
+                      "mode": "inline",
+                      "type": "rating",
+                      "count": 5,
                     },
                     "width":100,
                     "label": "道德规范"
