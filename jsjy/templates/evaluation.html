@@ -31,22 +31,31 @@
       	                "code": tick(),
       	                // 'admin':randomPassword(6),
       	                // 'name':randomPassword(2),
-      	                'cid':'513723199112023637',
+      	                'id':'',
   	              },
       	          "api": "post:/evaluation",
       	          "reload": "window",
-      	          "controls": [
+                  "controls": [
+                     {
+                      "type": "text",
+                      "name": "id",
+                      "label": "id",
+                      required:1,
+                      disabled:true,
+                    },
       	            {
                       "type": "text",
-                      "name": "uid",
+                      "name": "sid",
                       "label": "学生id",
                       required:1,
+                      disabled:true,
                     },
                     {
                       "type": "text",
                       "name": "tid",
                       "label": "老师id",
                       required:1,
+                      disabled:true,
                     },
                    {
                       "type": "text",
@@ -90,7 +99,89 @@
       	        }
       	      }
             }
-        
+        addjson_2={
+      	      "label": "教师评价",
+      	      "type": "button",
+      	      "actionType": "dialog",
+      	      "level": "success",
+      	      // "className": "m-b-sm",
+      	      "dialog": {
+      	        "title": "教师评价",
+      	        "size":'md',
+      	        "body": {
+      	          "type": "form",
+      	          "data": {
+      	                "code": tick(),
+      	                // 'admin':randomPassword(6),
+      	                // 'name':randomPassword(2),
+      	                'id':'',
+  	              },
+      	          "api": "post:/evaluation",
+      	          "reload": "window",
+                  "controls": [
+                     {
+                      "type": "text",
+                      "name": "id",
+                      "label": "id",
+                      required:1,
+                      <!-- disabled:true, -->
+                    },
+      	            {
+                      "type": "text",
+                      "name": "sid",
+                      "label": "学生id",
+                      required:1,
+                      <!-- disabled:true, -->
+                    },
+                    {
+                      "type": "text",
+                      "name": "tid",
+                      "label": "老师id",
+                      required:1,
+                      <!-- disabled:true, -->
+                    },
+                   {
+                      "type": "text",
+                      "name": "c_id",
+                      "label": "课程id",
+                      required:1,
+                    },
+                    {
+                      "type": "text",
+                      "name": "score1",
+                      "label": "教学态度"
+                    },
+                    {
+                      "type": "text",
+                      "name": "score2",
+                      "label": "教学效果"
+                    },
+                    {
+                      "type": "text",
+                      "name": "score3",
+                      "label": "作业安排"
+                    },
+                    {
+                      "type": "text",
+                      "name": "score4",
+                      "label": "教案准备"
+                    },
+                    {
+                      "type": "text",
+                      "name": "score5",
+                      "label": "道德规范"
+                    },
+                    {
+                      "type": "textarea",
+                      "name": "commit",
+                      "label": "评论",
+
+                    },
+                    
+      	          ]
+      	        }
+      	      }
+            }
         var editbutton={
               "tooltip": "修改",
                 "icon": "fa fa-pencil text-info",
@@ -115,7 +206,7 @@
         amis.embed("#main", {
           type: "page",
           title: "课程列表",
-          initApi: "/evaluationlist/minlist",
+          //initApi: "/evaluationlist/minlist",
           // subTitle: "展示一些常规的表单，包括验证、提示等等",
           body: [
           	{
@@ -123,14 +214,14 @@
           	  "body": {
           	    "type": "crud",
           	    syncLocation: false,
-          	    "api": "/courselist",
+          	    "api": "/evaluationlist",
           	    "quickSaveItemApi": "put:/evaluationlist/${id}",
           	    "saveImmediately":true,
                 //2010-1-5    
                   "name":"evaluationlist",
           	    "filterTogglable": true,
           	  	"headerToolbar": [
-          			addjson,
+          			addjson_2,
           	  		// "filter-toggler",
           	  	],
       	  	    "footerToolbar": [
@@ -139,13 +230,19 @@
           	  	      "pagination"
           	  	    ],
           	  	// "filter":topsertch,
-          	    "columns": [
+                "columns": [
+                {
+                  "name": "id",
+                  "sortable": true,
+                  "label": "ID",
+                  "width":150,
+                },
           	      {
-          	        "name": "uid",
+          	        "name": "sid",
                     "sortable": true,
-          	        "label": "ID",
+          	        "label": "学生ID",
                     "width":150,
-          	      },
+                  },
           	      {
                     "name": "c_id",
                     "searchable": true,
@@ -157,7 +254,7 @@
                     },
                     "fixed": "left",
                     "width":100,
-                    "label": "课程名"
+                    "label": "课程ID"
                   },
                   {
                     "name": "tid",

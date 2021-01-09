@@ -203,9 +203,9 @@ class Evaluation(db.Model):
     教师评价
     """
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer, db.ForeignKey('Student.id'))
-    tid = db.Column(db.Integer, db.ForeignKey('Teacher.a_id'))
-    c_id = db.Column(db.Integer, db.ForeignKey('Course.c_id'))
+    sid = db.Column(db.String(20))
+    tid = db.Column(db.String(20))
+    c_id = db.Column(db.Integer)
     score1 = db.Column(db.Integer)
     score2 = db.Column(db.Integer)
     score3 = db.Column(db.Integer)
@@ -213,8 +213,8 @@ class Evaluation(db.Model):
     score5 = db.Column(db.Integer)
     commit = db.Column(db.String(60))
 
-    def __init__(self, uid, tid, c_id, score1, score2, score3, score4, score5, commit):
-        self.uid = uid
+    def __init__(self, sid, tid, c_id, score1, score2, score3, score4, score5, commit):
+        self.sid = sid
         self.tid = tid
         self.c_id = c_id
         self.score1 = score1
